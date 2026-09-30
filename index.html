@@ -3,40 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>sonic — profile</title>
+  <title>@ Sonic_OFF</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="background"></div><div class="vignette"></div><div class="noise"></div>
   <div id="enter" class="enter-screen"><div class="enter-box"><div class="enter-dot"></div><div>click to enter</div><span>sonic</span></div></div>
+
+  <div class="volume-float" id="volumeFloat" aria-label="Volume">
+    <span id="volumeIcon">🔊</span><input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.65">
+  </div>
+
   <main class="stage">
     <section id="profileCard" class="profile-card">
-      <div class="top-widgets">
-        <div class="mini-profile">
-          <img src="profile.jpg" alt="sonic"><div><strong>sonic</strong><small>last seen recently</small></div><i></i>
+      <div class="top-row">
+        <div class="identity">
+          <div class="avatar-wrap"><img src="profile.jpg" class="avatar" alt="Photo de profil Sonic"><span class="online"></span></div>
+          <div class="name-row">
+            <h1>sonic</h1>
+            <div class="badges" aria-label="Badges">
+              <span class="badge verified-badge" data-tip="Verified" aria-label="Verified">✓</span>
+              <span class="badge premium-badge" data-tip="Premium" aria-label="Premium">◆</span>
+              <span class="badge cia-badge" data-tip="ils ne trouvent rien" aria-label="ils ne trouvent rien">CIA</span>
+            </div>
+          </div>
+          <p id="typewriter" class="description"></p>
         </div>
+
         <a class="discord-card" href="https://discord.gg/6FDqbqtTc" target="_blank" rel="noopener">
-          <img src="discord-avatar.png" alt="Discord avatar"><div><strong>sonic</strong><small>Discord</small></div><span>↗</span>
+          <img src="discord-avatar.png" alt="Avatar Discord">
+          <div><strong>sonic</strong><small>Discord</small><em>ouvrir ↗</em></div>
         </a>
       </div>
-      <div class="avatar-wrap"><img src="profile.jpg" class="avatar" alt="Photo de profil"><span class="online"></span></div>
-      <div class="name-row"><h1>sonic</h1><div class="badges" aria-label="Badges du profil">
-        <span class="badge verified-badge" data-tip="Verified" aria-label="Verified">✓</span>
-        <span class="badge premium-badge" data-tip="Premium" aria-label="Premium">◆</span>
-        <span class="badge cia-badge" data-tip="ils ne trouvent rien" aria-label="ils ne trouvent rien">CIA</span>
-      </div></div>
-      <p id="typewriter" class="description"></p>
+
       <div class="links">
         <a class="link" href="https://discord.gg/6FDqbqtTc" target="_blank" rel="noopener">Discord <span>↗</span></a>
         <a class="link" href="https://www.tiktok.com/@krayz.s.8" target="_blank" rel="noopener">TikTok <span>↗</span></a>
         <a class="link" href="https://www.youtube.com/watch?v=7_uEHEekk9Q&list=RD7_uEHEekk9Q&start_radio=1" target="_blank" rel="noopener">Musique <span>↗</span></a>
       </div>
       <div class="meta"><span>◉ <b id="views">0</b></span><span>⌖ BE</span></div>
+
       <div class="music-card">
         <div class="music-icon">♫</div>
-        <div class="music-info"><strong>le frère — zabuza</strong><small id="timeText">0:00 / 0:00</small><input id="progress" type="range" min="0" max="100" value="0" aria-label="Progression"></div>
-        <div class="volume"><span>🔊</span><input id="volume" type="range" min="0" max="1" step="0.01" value="0.7" aria-label="Volume"></div>
-        <a class="music-open" href="https://www.youtube.com/watch?v=7_uEHEekk9Q&list=RD7_uEHEekk9Q&start_radio=1" target="_blank" rel="noopener" aria-label="Ouvrir sur YouTube">↗</a>
+        <div class="music-info"><strong>le frère — zabuza</strong><small id="timeLabel">0:00 / 0:00</small></div>
+        <div class="progress-wrap"><input id="progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Progression"></div>
+        <div class="mini-volume"><span>🔊</span><input id="musicVolume" type="range" min="0" max="1" step="0.01" value="0.65" aria-label="Volume musique"></div>
+        <a class="music-open" href="https://www.youtube.com/watch?v=7_uEHEekk9Q&list=RD7_uEHEekk9Q&start_radio=1" target="_blank" rel="noopener" aria-label="Ouvrir la musique sur YouTube">↗</a>
         <button id="playBtn" aria-label="Lecture">▶</button>
       </div>
     </section>

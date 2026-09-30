@@ -1,21 +1,15 @@
-# SONIC — mini profil
+SONIC — version finale réparée
 
-Fichiers :
-- index.html
-- style.css
-- script.js
-- profile.png
+Contient :
+- fond personnage noir aux yeux en X
+- photo principale couronne
+- carte Discord avec avatar anime
+- badges miniatures Verified / Premium / CIA avec infobulles au survol
+- texte alterné avec effet machine à écrire
+- lecteur « le frère — zabuza » + progression + volume
+- contrôle de volume flottant
+- effet 3D du cadre à la souris
+- titre d'onglet animé « @ Sonic_OFF »
+- liens Discord, TikTok et YouTube
 
-À faire :
-1. Ajoute ton fichier audio sous le nom `music.mp3`.
-2. Le bouton Discord est déjà configuré avec ton invitation.
-4. Remplace le lien Instagram si tu en as un.
-
-Important :
-- Les navigateurs bloquent généralement la lecture automatique de l'audio avant une interaction.
-  C'est pour cela que la page affiche "click to enter".
-- Le compteur inclus ici est local au navigateur. Pour compter les visiteurs de tout le monde,
-  il faut connecter un service de statistiques ou une base de données.
-
-Musique fournie : https://www.youtube.com/watch?v=wBkfLkJ96_s
-Le bouton « Musique » ouvre la vidéo YouTube. Pour une lecture intégrée dans le lecteur du site, ajoute un fichier audio que tu as le droit d'utiliser sous le nom `music.mp3`.
+Pour GitHub Pages : envoyer le CONTENU de ce dossier à la racine du dépôt, pas le ZIP.
