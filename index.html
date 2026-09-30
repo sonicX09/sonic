@@ -9,11 +9,22 @@
 <body>
   <div class="background"></div><div class="vignette"></div><div class="noise"></div>
   <div id="enter" class="enter-screen"><div class="enter-box"><div class="enter-dot"></div><div>click to enter</div><span>sonic</span></div></div>
-
   <main class="stage">
     <section id="profileCard" class="profile-card">
+      <div class="top-widgets">
+        <div class="mini-profile">
+          <img src="profile.jpg" alt="sonic"><div><strong>sonic</strong><small>last seen recently</small></div><i></i>
+        </div>
+        <a class="discord-card" href="https://discord.gg/6FDqbqtTc" target="_blank" rel="noopener">
+          <img src="discord-avatar.png" alt="Discord avatar"><div><strong>sonic</strong><small>Discord</small></div><span>↗</span>
+        </a>
+      </div>
       <div class="avatar-wrap"><img src="profile.jpg" class="avatar" alt="Photo de profil"><span class="online"></span></div>
-      <h1>sonic <span class="verified">◆</span></h1>
+      <div class="name-row"><h1>sonic</h1><div class="badges" aria-label="Badges du profil">
+        <span class="badge verified-badge" data-tip="Verified" aria-label="Verified">✓</span>
+        <span class="badge premium-badge" data-tip="Premium" aria-label="Premium">◆</span>
+        <span class="badge cia-badge" data-tip="ils ne trouvent rien" aria-label="ils ne trouvent rien">CIA</span>
+      </div></div>
       <p id="typewriter" class="description"></p>
       <div class="links">
         <a class="link" href="https://discord.gg/6FDqbqtTc" target="_blank" rel="noopener">Discord <span>↗</span></a>
@@ -23,13 +34,14 @@
       <div class="meta"><span>◉ <b id="views">0</b></span><span>⌖ BE</span></div>
       <div class="music-card">
         <div class="music-icon">♫</div>
-        <div class="music-info"><strong>Bones — HDML</strong><small>slowed + reverb</small></div>
-        <a class="music-open" href="https://www.youtube.com/watch?v=7_uEHEekk9Q&list=RD7_uEHEekk9Q&start_radio=1" target="_blank" rel="noopener" aria-label="Ouvrir la musique sur YouTube">↗</a>
+        <div class="music-info"><strong>le frère — zabuza</strong><small id="timeText">0:00 / 0:00</small><input id="progress" type="range" min="0" max="100" value="0" aria-label="Progression"></div>
+        <div class="volume"><span>🔊</span><input id="volume" type="range" min="0" max="1" step="0.01" value="0.7" aria-label="Volume"></div>
+        <a class="music-open" href="https://www.youtube.com/watch?v=7_uEHEekk9Q&list=RD7_uEHEekk9Q&start_radio=1" target="_blank" rel="noopener" aria-label="Ouvrir sur YouTube">↗</a>
         <button id="playBtn" aria-label="Lecture">▶</button>
       </div>
     </section>
   </main>
-  <audio id="audio" preload="metadata"><source src="musique.mp3.mp3" type="audio/mpeg"></audio>
+  <audio id="audio" preload="metadata"><source src="le-frere-zabuza.mp3" type="audio/mpeg"></audio>
   <script src="script.js"></script>
 </body>
 </html>
