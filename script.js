@@ -5,29 +5,40 @@ const typewriter = document.getElementById("typewriter");
 const views = document.getElementById("views");
 const discordLink = document.getElementById("discordLink");
 
-const fullText = "ils enquêtent sur moi comme la CIA mais ils ne trouvent rien.";
+const messages = [
+  "ils enquêtent sur moi comme la CIA",
+  "mais ils ne trouvent rien."
+];
 
+let messageIndex = 0;
 let pos = 0;
 let deleting = false;
 
 function typeLoop() {
+  const currentText = messages[messageIndex];
+
   if (!deleting) {
     pos++;
-    typewriter.textContent = fullText.slice(0, pos);
-    if (pos >= fullText.length) {
+    typewriter.textContent = currentText.slice(0, pos);
+
+    if (pos >= currentText.length) {
       deleting = true;
-      setTimeout(typeLoop, 1500);
+      setTimeout(typeLoop, 2000);
       return;
     }
+
     setTimeout(typeLoop, 55);
   } else {
     pos--;
-    typewriter.textContent = fullText.slice(0, pos);
+    typewriter.textContent = currentText.slice(0, pos);
+
     if (pos <= 0) {
       deleting = false;
+      messageIndex = (messageIndex + 1) % messages.length;
       setTimeout(typeLoop, 400);
       return;
     }
+
     setTimeout(typeLoop, 30);
   }
 }
@@ -65,3 +76,19 @@ audio.addEventListener("ended", () => {
 });
 
 // Le lien Discord est configuré directement dans index.html.
+
+// Effet 3D : le cadre suit doucement la position de la souris.
+const profileCard = document.getElementById("profileCard");
+if (profileCard && window.matchMedia("(pointer: fine)").matches) {
+  profileCard.addEventListener("mousemove", (e) => {
+    const r = profileCard.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    profileCard.style.transform = `rotateX(${-y * 7}deg) rotateY(${x * 9}deg) scale3d(1.012,1.012,1.012)`;
+  });
+  profileCard.addEventListener("mouseleave", () => {
+    profileCard.style.transition = "transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease";
+    profileCard.style.transform = "rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
+    setTimeout(() => profileCard.style.transition = "transform .12s ease-out, box-shadow .25s ease", 460);
+  });
+}
