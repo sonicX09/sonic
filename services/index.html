@@ -23,7 +23,7 @@ summary{cursor:pointer;font-weight:700}
 </style></head><body><div class="wrap"><header><div class="logo">⚡ SONIC<span> SERVICES</span> <span style="display:inline-block;font-size:12px;font-weight:700;color:#d9c0ff;border:1px solid #8451c4;border-radius:999px;padding:5px 10px;vertical-align:middle;margin-left:8px">100% fiable</span></div><a class="pill" href="https://discord.gg/ABp4CJs4a" rel="noopener noreferrer" target="_blank">Rejoindre le Discord ↗</a></header>
 <section class="hero"><div class="tag">✦ Boutique digitale de sonic</div><h1>TES PROJETS.<br/><span>NOTRE ÉNERGIE.</span></h1><p>Montages, création de serveurs et design à petits prix. Choisis ton service, détaille ta demande et contacte sonic pour finaliser.</p><a class="btn" href="#services">Voir les services ↓</a></section>
 <section id="services"><h2 class="sectiontitle">Nos services</h2><div class="cards" id="cards"></div></section><section class="panel" id="panier"><h2>🛒 Panier intelligent</h2>
-<p class="v3-small">Ajoute plusieurs prestations créatives. Les demandes SONIC VOID restent traitées séparément via Discord.</p>
+<p class="v3-small">Ajoute plusieurs services, y compris SONIC VOID. Confirme les détails sur Discord avant de payer.</p>
 <div class="v3-grid" id="v3-products"></div>
 <div class="v3-small" id="v3-lines" style="margin-top:14px">Ton panier est vide.</div>
 <div class="v3-row"><label for="v3-promo">Code promo</label><input autocomplete="off" id="v3-promo" placeholder="Entre ton code promo"/><button class="btn" id="v3-apply" type="button">Appliquer</button></div>
@@ -47,7 +47,7 @@ function updateLicenseVisibility(){const visible=select.value==='void';document.
 const knownLicenseHashes=new Set(['269b0b956872b68b6a03d230284e7b8d472fa50e3dc099b77ad54d29702b655e', 'a61905088f68f5bb3734ded9025c6f968ff301702e1bf0c8ed7b69db643c948b', '6edfc51f085ba12aac43fd02fe07aff2356f8209a09a58dae94c69fecba62ef1', '576a4590261b66d63571592d3047156cc2800763e06c4249fad64b0fea2a70db', '0a7b8145ee7853ce71bdfea3ca308a344ff3d3b0f7a1bc62deadc038f7523bbc', '442638450397ef840a5022a331b1dee8fdf67583f4fd6d3c76bf5068c7a997a6', 'bdef2003538f945d5b02c086f396336eb44dd4a200347578941935aef1b5aefa', '420eac38eb2cafa91fba909c7e6ca6877bb0628a02abd4ec819597ef817ad20e', '93fc40e4c158b224b5afc5abc7670a75dabee0d528426a2d650014d69ca16a7a', '622a1ec96701ad6b15d32044257acf9c744e3fad3b8d95eac0aae80560702d91']);document.getElementById('license-form').addEventListener('submit',async e=>{e.preventDefault();const key=document.getElementById('license-key').value.trim().toUpperCase();const msg=document.getElementById('license-message');document.getElementById('license-success').classList.add('hidden');msg.textContent='Vérification en cours…';msg.style.color='#b8b8c6';try{const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(key));const hex=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');if(knownLicenseHashes.has(hex)){msg.textContent='✓ LICENCE VÉRIFIÉE — Clé reconnue sur ce site';msg.style.color='#4ade80';document.getElementById('license-success').classList.remove('hidden');}else{document.getElementById('license-success').classList.add('hidden');msg.textContent='✕ CLÉ INVALIDE — Vérifie ta saisie ou ouvre un ticket Discord';msg.style.color='#ff5566';}}catch{msg.textContent='Vérification indisponible. Utilise le site en HTTPS.';msg.style.color='#ffb8bf';}});document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('order').addEventListener('submit',e=>{e.preventDefault();const s=services.find(x=>x.id===select.value),pseudo=document.getElementById('pseudo').value.trim(),details=document.getElementById('details').value.trim(),refs=document.getElementById('references').value.trim();if(!pseudo||!details)return;const orderId='SONIC-'+Date.now().toString(36).toUpperCase();document.getElementById('summary').value=`COMMANDE ${orderId}\nClient Discord : ${pseudo}\nService : ${s.name}\nPrix affiché : ${s.price}\nDescription : ${details}\nRéférences : ${refs||'Aucune'}\nStatut : EN ATTENTE DE CONFIRMATION ET DE PAIEMENT`;document.getElementById('result').classList.remove('hidden');document.getElementById('result').scrollIntoView({behavior:'smooth'});});document.getElementById('copy').onclick=async()=>{const t=document.getElementById('summary');try{await navigator.clipboard.writeText(t.value);document.getElementById('copy').textContent='✓ Copié !'}catch{t.select();document.execCommand('copy');document.getElementById('copy').textContent='Sélectionné / copié'}};
 
 // V3 : panier local pour les prestations créatives
-const v3Items = services.filter(s=>s.id!=='void').map(s=>({...s,amount:Number(s.price.replace(' €','').replace(',','.'))}));
+const v3Items = services.map(s=>({...s,amount:Number(s.price.replace(' €','').replace(',','.'))}));
 const v3Cart = new Map();
 let v3Discount = false;
 const v3Money = n=>n.toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
@@ -79,7 +79,7 @@ function v3Render(){
 document.getElementById('v3-apply').addEventListener('click',()=>{
  const code=document.getElementById('v3-promo').value.trim().toUpperCase();
  v3Discount=code==='SONIC10';
- document.getElementById('v3-promo-msg').textContent=v3Discount?'✓ SONIC10 : réduction de 10 % sur les prestations créatives.': 'Code non reconnu. Aucun rabais appliqué.';
+ document.getElementById('v3-promo-msg').textContent=v3Discount?'✓ Code promo accepté : réduction de 10 % sur tout le panier, SONIC VOID inclus.': 'Code non reconnu. Aucun rabais appliqué.';
  v3Render();
 });
 document.getElementById('v3-clear').addEventListener('click',()=>{v3Cart.clear();v3Render()});
@@ -88,18 +88,18 @@ document.getElementById('v3-to-order').addEventListener('click',()=>{
  const lines=[...v3Cart].map(([id,qty])=>{const s=v3Items.find(x=>x.id===id);return `${s.name} × ${qty}`});
  const sum=[...v3Cart].reduce((n,[id,q])=>n+v3Items.find(x=>x.id===id).amount*q,0);
  select.value=v3Cart.keys().next().value;updateLicenseVisibility();
- document.getElementById('details').value='Commande groupée :\n'+lines.join('\n')+'\nCode promo : '+(v3Discount?'SONIC10 (-10 %)':'aucun')+'\nTotal indicatif : '+v3Money(sum*(v3Discount?.9:1));
+ document.getElementById('details').value='Commande groupée :\n'+lines.join('\n')+'\nCode promo : '+(v3Discount?'Réduction de 10 % appliquée':'aucun')+'\nTotal indicatif : '+v3Money(sum*(v3Discount?.9:1));
  document.getElementById('result').classList.add('hidden');
  document.getElementById('commande').scrollIntoView({behavior:'smooth'});
 });
 // Les récapitulatifs doivent refléter les commandes groupées et les codes promo.
 const v3Order=document.getElementById('order');
 v3Order.addEventListener('submit',()=>{
- if(!v3Cart.size || select.value==='void')return;
+ if(!v3Cart.size)return;
  const summary=document.getElementById('summary');
  const subtotal=[...v3Cart].reduce((n,[id,q])=>n+v3Items.find(x=>x.id===id).amount*q,0);
  const lines=[...v3Cart].map(([id,q])=>{const s=v3Items.find(x=>x.id===id);return `${s.name} × ${q} : ${v3Money(s.amount*q)}`});
- summary.value=summary.value.replace(/^Service : .*$/m,'Service : Commande groupée').replace(/^Prix affiché : .*$/m,'Prix total indicatif : '+v3Money(subtotal*(v3Discount?.9:1)))+'\nDétail panier :\n'+lines.join('\n')+'\nPromotion : '+(v3Discount?'SONIC10 (-10 %)':'aucune');
+ summary.value=summary.value.replace(/^Service : .*$/m,'Service : Commande groupée').replace(/^Prix affiché : .*$/m,'Prix total indicatif : '+v3Money(subtotal*(v3Discount?.9:1)))+'\nDétail panier :\n'+lines.join('\n')+'\nPromotion : '+(v3Discount?'Réduction de 10 % appliquée':'aucune');
 });
 select.addEventListener('change',()=>{document.getElementById('result').classList.add('hidden')});
 v3Render();
